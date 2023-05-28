@@ -326,6 +326,7 @@
     "get-package-type": "^0.1.0",
     "get-stream": "^6.0.1",
     "get-symbol-description": "^1.0.0",
+    "gh-pages": "^5.0.0",
     "glob": "^7.2.3",
     "glob-parent": "^6.0.2",
     "glob-to-regexp": "^0.4.1",
@@ -956,11 +957,20 @@
     "yocto-queue": "^0.1.0"
   },
   "scripts": {
+    "dev": "webpack serve",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "set PORT=3000 && react-app-rewired start ",
-    "build": "CI= react-app-rewired build ",
-    "build-win": "react-app-rewired build ",
-    "test": "react-app-rewired test",
+    "build": "CI= react-scripts build",
+    "build-win": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "jest": {
     "transform": {
@@ -989,7 +999,8 @@
     ]
   },
   "devDependencies": {
-    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@babel/preset-env": "^7.22.2"
+    "@testing-library/user-event": "^14.4.3",
+    "dotenv": "^16.0.1",
+    "gh-pages": "^4.0.0"
   }
 }
