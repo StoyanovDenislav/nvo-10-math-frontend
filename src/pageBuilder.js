@@ -16,12 +16,14 @@ function PageBuilder() {
   }, []);
 
   const fetchDataa = () => {
-    axios.get("https://nvo-10-math-backend.onrender.com/killswitch").then((response) => {
-      killSwitchSet(response.data[0].killswitch);
-      //console.log(response.data[0].killswitch);
-      //console.log(killSwitch);
-      setTimeout(fetchDataa(), 1000);
-    });
+    axios
+      .get("https://nvo-10-math-backend.onrender.com/killswitch")
+      .then((response) => {
+        killSwitchSet(response.data[0].killswitch);
+        //console.log(response.data[0].killswitch);
+        //console.log(killSwitch);
+        setTimeout(fetchDataa(), 1000);
+      });
   };
 
   if (!killSwitch) {
@@ -30,7 +32,7 @@ function PageBuilder() {
         <NavBar />
 
         <Routes>
-          <Route path="/main_page/mainPage" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
           <Route path="/test_page/ExamPage" element={<ExamPage />} />
           <Route path="/8thGrade/grade8" element={<Grade8 />} />
         </Routes>
