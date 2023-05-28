@@ -965,8 +965,14 @@
   "jest": {
     "transform": {
       "^.+\\.[jt]sx?$": "babel-jest"
-    }
+    },
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!(@testing-library))"
+    ]
   },
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining"
+  ],
   "proxy": "https://localhost:4000/",
   "author": "",
   "license": "ISC",
@@ -983,6 +989,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/preset-env": "^7.22.2"
   }
 }
