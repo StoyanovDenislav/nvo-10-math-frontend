@@ -32,7 +32,7 @@ function PageBuilder() {
         <NavBar />
 
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/nvo-10-math-frontend" element={<MainPage />} />
           <Route path="/test_page/ExamPage" element={<ExamPage />} />
           <Route path="/8thGrade/grade8" element={<Grade8 />} />
         </Routes>
