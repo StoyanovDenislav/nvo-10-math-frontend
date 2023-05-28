@@ -12,7 +12,7 @@ function NavBar() {
   return (
     <div>
       <div className="w3-bar w3-red">
-        <Link to="/main_page/mainPage" className="w3-bar-item w3-button">
+        <Link to="/nvo-10-math-frontend" className="w3-bar-item w3-button">
           Начална страница
         </Link>
         <Link
