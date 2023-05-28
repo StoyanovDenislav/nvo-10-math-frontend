@@ -26,7 +26,7 @@ test("NavBar render and route testing", () => {
   fireEvent.click(screen.getByText(/Начална страница/i));
 
   // verify page content for default route
-  expect(window.location.pathname).toBe("/main_page/mainPage");
+  expect(window.location.pathname).toBe("/nvo-10-math-frontend");
 
   const testLinks = screen.queryAllByText(/Тест/i);
   fireEvent.click(testLinks[0]); // Click the first matching element
