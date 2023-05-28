@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/nvo-10-math-frontend/static/css/main.02b9fd2e.css",
-    "main.js": "/nvo-10-math-frontend/static/js/main.8e8eb0ba.js",
+    "main.js": "/nvo-10-math-frontend/static/js/main.c0f1c359.js",
     "static/js/787.b43fa8f1.chunk.js": "/nvo-10-math-frontend/static/js/787.b43fa8f1.chunk.js",
     "index.html": "/nvo-10-math-frontend/index.html",
     "main.02b9fd2e.css.map": "/nvo-10-math-frontend/static/css/main.02b9fd2e.css.map",
-    "main.8e8eb0ba.js.map": "/nvo-10-math-frontend/static/js/main.8e8eb0ba.js.map",
+    "main.c0f1c359.js.map": "/nvo-10-math-frontend/static/js/main.c0f1c359.js.map",
     "787.b43fa8f1.chunk.js.map": "/nvo-10-math-frontend/static/js/787.b43fa8f1.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.02b9fd2e.css",
-    "static/js/main.8e8eb0ba.js"
+    "static/js/main.c0f1c359.js"
   ]
 }
