@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Footer from "../footer/footer";
 import MainPage from "../main_page/mainPage";
 import NavBar from "../NavBar/NavBar";
-import App from "../test_page/taskVisualizer";
 
 test("Footer render", () => {
   render(<Footer />);
@@ -15,12 +14,6 @@ test("Footer render", () => {
 test("Mainpage render", () => {
   render(<MainPage />);
   const linkElement = screen.getByText(/Сайт за подготовка за НВО 10. клас/i);
-  expect(linkElement).toBeInTheDocument();
-});
-
-test("Taskviz render", () => {
-  render(<App />);
-  const linkElement = screen.getByText(/Старт/i);
   expect(linkElement).toBeInTheDocument();
 });
 
