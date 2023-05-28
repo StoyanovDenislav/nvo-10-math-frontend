@@ -1,11 +1,12 @@
 import "./ExamPage.css";
 import React from "react";
-import TaskVisualizer from "./taskVisualizer";
+import App from "./taskVisualizer";
+import axios from "axios";
 
 function ExamPage() {
   return (
     <div>
-      <TaskVisualizer />
+      <App />
     </div>
   );
 }

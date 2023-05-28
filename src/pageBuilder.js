@@ -16,7 +16,7 @@ function PageBuilder() {
   }, []);
 
   const fetchDataa = () => {
-    axios.get("http://localhost:4000/killswitch").then((response) => {
+    axios.get("https://nvo-10-math-backend.onrender.com/killswitch").then((response) => {
       killSwitchSet(response.data[0].killswitch);
       //console.log(response.data[0].killswitch);
       //console.log(killSwitch);

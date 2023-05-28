@@ -199,11 +199,11 @@ function TaskVisualizer({ tasks, handleSubmit }) {
     </div>
   );
 }
-
 function App() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [isDBConnected, setIsDBConnected] = useState(false); // New state for DB connection status
 
   const handleSubmit = (answers) => {
     setUserAnswers(answers);
@@ -214,16 +214,29 @@ function App() {
   }, []);
 
   const fetchData = () => {
-    axios.get("http://localhost:4000/tasks").then((response) => {
-      //console.log(response.data);
-      setTasks(response.data);
-      setTimeout(fetchData, 1000); // Remove the parentheses after fetchData
-    });
+    axios
+      .get("https://nvo-10-math-backend.onrender.com/tasks")
+      .then((response) => {
+        setTasks(response.data);
+      })
+      .catch((error) => {
+        console.log("Error occurred during data fetching:", error);
+      })
+      .finally(() => {
+        setIsDBConnected(true); // Set DB connection status to true after fetching data
+        setIsLoading(false); // Set loading state to false
+      });
   };
 
   return (
     <div className="App">
-      <TaskVisualizer tasks={tasks} handleSubmit={handleSubmit} />
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : isDBConnected ? (
+        <TaskVisualizer tasks={tasks} handleSubmit={handleSubmit} />
+      ) : (
+        <div>Connecting to the database...</div>
+      )}
     </div>
   );
 }
