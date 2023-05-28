@@ -961,7 +961,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "start": "set PORT=3000 && react-app-rewired start ",
-    "build": "react-scripts build",
+    "build": "CI= react-scripts build",
     "build-win": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
