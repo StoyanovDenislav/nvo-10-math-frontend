@@ -3,7 +3,8 @@
 /* Navigation Bar Background Color */
 .w3-bar {
   background-color: #0b2447;
-
+  border-top-left-radius: 0px !important;
+  border-top-right-radius: 0px !important;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
   /* Override background color of the nav bar */

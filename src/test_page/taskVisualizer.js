@@ -25,9 +25,18 @@ function TaskVisualizer({ tasks, handleSubmit }) {
     return () => clearInterval(timer);
   }, [showResult, time, handleSubmit, userAnswers, currentTaskIndex]);
 
-  const handleAnswerChange = (event, index) => {
+  const handleAnswerChange = (event, taskIndex, answerIndex) => {
     const updatedAnswers = [...userAnswers];
-    updatedAnswers[currentTaskIndex] = event.target.value;
+    if (!updatedAnswers[taskIndex]) {
+      updatedAnswers[taskIndex] = [];
+    }
+
+    if (task.type === "open") {
+      updatedAnswers[taskIndex][answerIndex] = event.target.value;
+    } else {
+      updatedAnswers[taskIndex] = [event.target.value];
+    }
+
     setUserAnswers(updatedAnswers);
   };
 
@@ -51,7 +60,7 @@ function TaskVisualizer({ tasks, handleSubmit }) {
     setCurrentTaskIndex(0);
     setShowResult(false);
     setTime(5400); // Reset timer to 1 hour and 30 minutes
-    setUserAnswers(new Array(tasks.length).fill(""));
+    setUserAnswers(new Array(tasks.length).fill([]));
   };
 
   const handleSubmitTest = () => {
@@ -71,9 +80,11 @@ function TaskVisualizer({ tasks, handleSubmit }) {
               {task.image && (
                 <img className="task-image" src={task.image} alt="Task Image" />
               )}
-              <p>Вашият отговор: {userAnswers[index]}</p>
+              <p>Вашият отговор: {userAnswers[index]?.join(", ")}</p>
               <p>Верният отговор: {task.answers.join(", ")}</p>
-              {task.answers.includes(userAnswers[index]) ? (
+              {task.answers.every((answer) =>
+                userAnswers[index]?.includes(answer)
+              ) ? (
                 <p className="correct-answer">Вашият отговор е верен!</p>
               ) : (
                 <p className="incorrect-answer">Вашият отговор е грешен.</p>
@@ -109,45 +120,44 @@ function TaskVisualizer({ tasks, handleSubmit }) {
                       .padStart(2, "0")}`}
                   </p>
                   <div className="answer-container">
-                    {task.type === "open" ? (
-                      task.answers.length > 1 ? (
-                        task.answers.map((_, index) => (
-                          <div key={index} className="input-field">
-                            <label>{task.open_answer_letters[index]}</label>
+                    {task.type === "open"
+                      ? task.answers.map((_, answerIndex) => (
+                          <div key={answerIndex} className="input-field">
+                            <label>
+                              {task.open_answer_letters[answerIndex]}
+                            </label>
                             <input
                               type="text"
-                              value={userAnswers[currentTaskIndex] || ""}
+                              value={
+                                userAnswers[currentTaskIndex]?.[answerIndex] ||
+                                ""
+                              }
                               onChange={(event) =>
-                                handleAnswerChange(event, currentTaskIndex)
+                                handleAnswerChange(
+                                  event,
+                                  currentTaskIndex,
+                                  answerIndex
+                                )
                               }
                             />
                           </div>
                         ))
-                      ) : (
-                        <input
-                          type="text"
-                          value={userAnswers[currentTaskIndex] || ""}
-                          onChange={(event) =>
-                            handleAnswerChange(event, currentTaskIndex)
-                          }
-                        />
-                      )
-                    ) : (
-                      task.possible_answers.map((answer, index) => (
-                        <div key={index} className="radio-option">
-                          <input
-                            type="radio"
-                            name={`task_${currentTaskIndex}`}
-                            value={answer}
-                            checked={userAnswers[currentTaskIndex] === answer}
-                            onChange={(event) =>
-                              handleAnswerChange(event, currentTaskIndex)
-                            }
-                          />
-                          <label>{answer}</label>
-                        </div>
-                      ))
-                    )}
+                      : task.possible_answers.map((answer, answerIndex) => (
+                          <div key={answerIndex} className="radio-option">
+                            <input
+                              type="radio"
+                              name={`task_${currentTaskIndex}`}
+                              value={answer}
+                              checked={
+                                userAnswers[currentTaskIndex]?.[0] === answer
+                              }
+                              onChange={(event) =>
+                                handleAnswerChange(event, currentTaskIndex, 0)
+                              }
+                            />
+                            <label>{answer}</label>
+                          </div>
+                        ))}
                   </div>
                   <div className="task-buttons">
                     {currentTaskIndex > 0 && (
@@ -199,47 +209,40 @@ function TaskVisualizer({ tasks, handleSubmit }) {
     </div>
   );
 }
+
 function App() {
   const [userAnswers, setUserAnswers] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDBConnected, setIsDBConnected] = useState(false); // New state for DB connection status
-
-  const handleSubmit = (answers) => {
-    setUserAnswers(answers);
-  };
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "https://nvo-10-math-backend.onrender.com/tasks"
+        );
+        setTasks(response.data);
+      } catch (error) {
+        console.log("Error fetching tasks:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchData();
   }, []);
 
-  const fetchData = () => {
-    axios
-      .get("https://nvo-10-math-backend.onrender.com/tasks")
-      .then((response) => {
-        setTasks(response.data);
-      })
-      .catch((error) => {
-        console.log("Error occurred during data fetching:", error);
-      })
-      .finally(() => {
-        setIsDBConnected(true); // Set DB connection status to true after fetching data
-        setIsLoading(false); // Set loading state to false
-      });
+  const handleSubmit = (answers) => {
+    setUserAnswers(answers);
+    // Do something with the user answers (e.g., send them to a server)
   };
 
   return (
     <div className="App">
       {isLoading ? (
-        <div>Loading...</div>
-      ) : isDBConnected ? (
-        <TaskVisualizer
-          className="start-button"
-          tasks={tasks}
-          handleSubmit={handleSubmit}
-        />
+        <p>Loading tasks...</p>
       ) : (
-        <div>Connecting to the database...</div>
+        <TaskVisualizer tasks={tasks} handleSubmit={handleSubmit} />
       )}
     </div>
   );
