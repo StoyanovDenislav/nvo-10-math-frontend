@@ -39,6 +39,3 @@ jobs:
 
       - name: Deploy to gh-pages
         run: npm run deploy
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build
