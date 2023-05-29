@@ -30,10 +30,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 20px;
 }
 
 .button {
+  flex: 1 0 120px; /* Adjust the width as needed */
+  margin: 5px; /* Add margin between buttons */
   padding: 10px 20px;
   background-color: #007bff;
   color: #fff;
@@ -43,11 +46,13 @@
 }
 
 .button-prev {
-  margin-right: 10px;
+  flex-basis: calc(50% - 5px); /* Adjust the width as needed */
+  padding-right: 5px; /* Add space between buttons */
 }
 
 .button-next {
-  margin-left: 10px;
+  flex-basis: calc(50% - 5px); /* Adjust the width as needed */
+  padding-left: 5px; /* Add space between buttons */
 }
 
 .task-number {
