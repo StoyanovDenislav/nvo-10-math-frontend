@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./taskVisualizer.css";
 import axios from "axios";
-require("dotenv/config");
 
 function TaskVisualizer({ tasks, handleSubmit }) {
   const [currentTaskIndex, setCurrentTaskIndex] = useState(null);
