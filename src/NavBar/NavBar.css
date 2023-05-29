@@ -2,9 +2,13 @@
 
 /* Navigation Bar Background Color */
 .w3-bar {
-  background-color: #0b2447 !important;
+  background-color: #0b2447;
+
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
   /* Override background color of the nav bar */
   overflow: hidden !important;
+  transition: border-radius 0.5s ease;
 }
 
 .w3-bar-item {
@@ -32,6 +36,12 @@
   background-color: #0b2447 !important;
 }
 
+.w3-show {
+  border-radius: 0;
+  transition: border-radius 0.5s ease, max-height 0.5s ease;
+  max-height: 500px;
+}
+
 @media screen and (max-width: 600px) and (max-height: 800px) {
   .w3-bar-item {
     color: #a5d7e8 !important;
@@ -46,4 +56,23 @@
     outline: 0; /* Override text color */
     overflow: hidden !important;
   }
+
+  .w3-bar {
+    border-radius: 25px;
+  }
+
+  .w3-show {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+}
+
+/* List Animation */
+.w3-bar-block {
+  transform-origin: top;
+  transform: translateY(-100%);
+}
+
+.w3-bar-block.w3-show {
+  transform: translateY(0%);
 }

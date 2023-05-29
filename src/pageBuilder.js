@@ -5,10 +5,15 @@ import Grade8 from "./8thGrade/grade8";
 import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import Footer from "./footer/footer";
-
+import "aos/dist/aos.css";
+import AOS from "aos";
 import axios from "axios";
 
 function PageBuilder() {
+  useEffect(() => {
+    AOS.init();
+  });
+
   const [killSwitch, killSwitchSet] = useState();
 
   useEffect(() => {

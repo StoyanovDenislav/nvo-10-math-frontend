@@ -14,13 +14,45 @@
   overflow: hidden;
 }
 
+body::-webkit-scrollbar {
+  width: 3px;
+}
+
+body::-webkit-scrollbar-track {
+  background-color: #0b2447;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: #a5d7e8;
+  border-radius: 25px;
+}
+
+.panel {
+  position: absolute;
+  top: 50vh;
+  display: block;
+  justify-content: center;
+  align-items: center;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+  border-top-left-radius: 25px;
+  border-top-right-radius: 25px;
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 36, 71, 1),
+    rgba(25, 55, 109, 1)
+  );
+  width: 100%; /* Base width */
+  min-height: 300%; /* Minimum height */
+}
+
 body {
   margin: 0;
   overflow: hidden;
 }
 
 .text {
-  position: relative;
+  position: absolute;
   top: 0vh;
   font-size: 50px;
   font-family: "Montserrat", sans-serif;

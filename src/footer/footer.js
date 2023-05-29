@@ -22,7 +22,13 @@ function Footer() {
   }, []);
 
   return (
-    <footer className="footer" style={{ height: `calc(${pageHeightVh}vh)` }}>
+    <footer
+      data-aos="fade-up"
+      data-aos-offset="0"
+      data-aos-duration="1500"
+      className="footer"
+      style={{ height: `calc(${pageHeightVh}vh)` }}
+    >
       <p>
         Developed by Denislav Stoyanov©
         <br />

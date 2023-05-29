@@ -12,15 +12,17 @@ body {
   height: 5vh;
   text-align: center;
   padding: 0;
-  background-color: #0b2447;
+  background-image: linear-gradient(
+    to right,
+    rgba(11, 36, 71, 1),
+    rgba(25, 55, 109, 1)
+  );
   color: #a5d7e8;
   z-index: 2;
   overflow: hidden;
 }
 
 @media screen and (max-width: 600px) and (max-height: 800px) {
- 
-
   .footer {
     position: fixed; /* Set position to fixed */
     top: 93vh; /* Align footer to the bottom */
